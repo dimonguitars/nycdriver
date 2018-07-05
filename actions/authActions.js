@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILED
 } from './types';
+import { Actions } from 'react-native-router-flux';
 
 export const emailChanged = email => {
   return {
@@ -25,13 +26,10 @@ export const loginUser = ({ email, password }) => {
   return dispatch => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => loginSuccess(dispatch, user))
-      // .catch(
-      //   firebase
-      //     .auth()
-      //     .createUserWithEmailAndPassword(email, password)
-      //     .then(user => loginSucces(dispatch, user))
-      //     .catch(() => loginUserFailed(dispatch, error))
-      // );
+        .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(user => loginSuccess(dispatch, user))
+            .catch((error) => loginUserFailed(dispatch, error))
+      );
   }
 
 };
@@ -45,7 +43,8 @@ const loginUserFailed = (dispatch, error) => {
 
 const loginSuccess = (dispatch, user) => {
   dispatch({
-    type: LOGIN_SUCCESS,
+    type: LOGIN_USER,
     payload: user.user
   });
+Actions.main();
 };

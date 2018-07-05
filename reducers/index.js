@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import authReducer from './authReducer'
-
+import authReducer from './authReducer';
+import plateReducer from './plateReducer';
 
 export default combineReducers({
-  auth: authReducer
-})
+  auth: authReducer,
+  plate: plateReducer
+});
