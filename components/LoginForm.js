@@ -54,7 +54,7 @@ class Login extends Component {
     console.log('create account');
   }
   formInputValidate() {
-    if(this.props.email)
+    if(this.props.emailRequired)
      return (
        <Text>PLease enter email</Text>
      )
@@ -65,7 +65,7 @@ class Login extends Component {
 
   }
   render() {
-    console.log(this.props.passwordRequired)
+    console.log(this.props.loading)
     const { button, buttonText, textInput, container, logo } = styles;
     return (
       <View style={container}>

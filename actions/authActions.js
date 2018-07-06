@@ -3,8 +3,8 @@ import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
   LOGIN_USER,
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILED,
   USER_EMAIL_REQUIRED,
   USER_PASSWORD_REQUIRED
 } from './types';
@@ -33,6 +33,7 @@ export const loginUser = ({ email, password }) => {
       dispatch({ type: USER_PASSWORD_REQUIRED, payload: "Please enter password"})
     }
     else {
+      dispatch({ type: LOGIN_USER})
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => loginSuccess(dispatch, user))
           .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -46,14 +47,14 @@ export const loginUser = ({ email, password }) => {
 
 const loginUserFailed = (dispatch, error) => {
   dispatch({
-    type: LOGIN_FAILED,
+    type: LOGIN_USER_FAILED,
     payload: error
   });
 };
 
 const loginSuccess = (dispatch, user) => {
   dispatch({
-    type: LOGIN_USER,
+    type: LOGIN_USER_SUCCESS,
     payload: user.user
   });
 Actions.main();
