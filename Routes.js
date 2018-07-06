@@ -8,10 +8,10 @@ const Routes = () => {
   return (
     <Router>
       <Stack key="root">
-        <Scene key='auth' >
-          <Scene key="login" component={LoginForm} title="Please Login" />
+        <Scene key='auth' initial>
+          <Scene key="login" component={LoginForm} hideNavBar />
         </Scene>
-        <Scene key='main' initial  >
+        <Scene key='main'>
           <Scene
           title='NYCdriver'
           key='DashBoard'

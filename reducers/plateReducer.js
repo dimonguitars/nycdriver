@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action)
   switch (action.type) {
     case PLATE_NUMBER_ENTER:
       return { ...state, plateNumber: action.payload };

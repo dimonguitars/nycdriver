@@ -12,7 +12,9 @@ import {
   emailChanged,
   passwordChanged,
   loginUser,
-  loginUserFailed
+  loginUserFailed,
+  emailRequired,
+  passwordRequired
 } from '../actions/authActions';
 
 class Login extends Component {
@@ -45,12 +47,30 @@ class Login extends Component {
   loginUser() {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });
+
+  }
+
+  createUserAccount() {
+    console.log('create account');
+  }
+  formInputValidate() {
+    if(this.props.email)
+     return (
+       <Text>PLease enter email</Text>
+     )
+     else if (this.props.passwordRequired)
+     return (
+       <Text>Please enter password</Text>
+     )
+
   }
   render() {
-    console.log(this.props.error);
-    const { button, buttonText, textInput, container } = styles;
+    console.log(this.props.passwordRequired)
+    const { button, buttonText, textInput, container, logo } = styles;
     return (
       <View style={container}>
+        <Text style={logo}>NYCDriver</Text>
+          {this.formInputValidate()}
         <TextInput
           placeholder="email@gmail.com"
           onChangeText={this.onEmailInput.bind(this)}
@@ -71,6 +91,14 @@ class Login extends Component {
         />
 
         {this.renderLogginButton()}
+
+        <TouchableOpacity
+          style={button}
+          title="Create account"
+          onPress={this.createUserAccount.bind(this)}
+        >
+          <Text style={buttonText}>Create account</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -90,8 +118,7 @@ const styles = {
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'yellow',
-    marginLeft: 5,
-    marginRight: 5
+    margin: 5
   },
   textInput: {
     color: 'white',
@@ -109,13 +136,20 @@ const styles = {
     fontSize: 16,
     fontWeight: '600',
     padding: 10
+  },
+  logo: {
+    alignSelf: 'center',
+    color: 'white',
+    fontSize: 50,
+    fontWeight: '600',
+    marginBottom: 100
   }
 };
 const mapStatetoProps = ({ auth }) => {
-  const { email, password, loading, error } = auth;
-  return { email, password, loading, error };
+  const { email, password, loading, error, emailRequired, passwordRequired } = auth;
+  return { email, password, loading, error, emailRequired, passwordRequired };
 };
 export default connect(
   mapStatetoProps,
-  { emailChanged, passwordChanged, loginUser, loginUserFailed }
+  { emailChanged, passwordChanged, loginUser, loginUserFailed, emailRequired, passwordRequired }
 )(Login);

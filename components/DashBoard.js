@@ -18,6 +18,7 @@ class DashBoard extends Component {
   }
 
   render() {
+    const { plateNumber } = this.props
     const { labelStyle, textInput, container, buttonStyle } = styles;
     return (
       <View style={container}>
@@ -31,7 +32,7 @@ class DashBoard extends Component {
         />
         <Button
           style={buttonStyle}
-          onPress={() => console.log('save to firebase')}
+          onPress={() => console.log(plateNumber)}
         >
           NEXT
         </Button>

@@ -4,7 +4,9 @@ import {
   PASSWORD_CHANGED,
   LOGIN_USER,
   LOGIN_SUCCESS,
-  LOGIN_FAILED
+  LOGIN_FAILED,
+  USER_EMAIL_REQUIRED,
+  USER_PASSWORD_REQUIRED
 } from './types';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,12 +26,20 @@ export const passwordChanged = pass => {
 
 export const loginUser = ({ email, password }) => {
   return dispatch => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => loginSuccess(dispatch, user))
-        .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(user => loginSuccess(dispatch, user))
-            .catch((error) => loginUserFailed(dispatch, error))
-      );
+    if(!email){
+      dispatch({ type: USER_EMAIL_REQUIRED, payload: 'Please enter email'})
+    }
+    else if (!password) {
+      dispatch({ type: USER_PASSWORD_REQUIRED, payload: "Please enter password"})
+    }
+    else {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(user => loginSuccess(dispatch, user))
+          .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(user => loginSuccess(dispatch, user))
+              .catch((error) => loginUserFailed(dispatch, error))
+        );
+    }
   }
 
 };
