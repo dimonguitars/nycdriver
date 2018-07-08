@@ -65,7 +65,7 @@ class Login extends Component {
 
   }
   render() {
-    console.log(this.props.loading)
+    console.log(this.props.user)
     const { button, buttonText, textInput, container, logo } = styles;
     return (
       <View style={container}>
@@ -74,7 +74,7 @@ class Login extends Component {
         <TextInput
           placeholder="email@gmail.com"
           onChangeText={this.onEmailInput.bind(this)}
-          placeholderTextColor="white"
+          placeholderTextColor="#7f9cdb"
           style={textInput}
           autoCorrect={false}
           autoCapitalize="none"
@@ -83,7 +83,7 @@ class Login extends Component {
         <TextInput
           placeholder="password"
           onChangeText={this.onPasswordInput.bind(this)}
-          placeholderTextColor="white"
+          placeholderTextColor="#7f9cdb"
           style={textInput}
           secureTextEntry
           autoCorrect={false}
@@ -146,8 +146,12 @@ const styles = {
   }
 };
 const mapStatetoProps = ({ auth }) => {
-  const { email, password, loading, error, emailRequired, passwordRequired } = auth;
-  return { email, password, loading, error, emailRequired, passwordRequired };
+  const { email, password, loading, error,
+          emailRequired, passwordRequired, user } = auth;
+  return {
+    user, email, password, loading,
+    error, emailRequired, passwordRequired
+  };
 };
 export default connect(
   mapStatetoProps,

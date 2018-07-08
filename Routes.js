@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Actions, Scene, Router, Stack } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
-import DashBoard from './components/DashBoard';
+import PlateNumber from './components/PlateNumber';
 import testScreen from './components/testScreen';
 
 const Routes = () => {
@@ -14,8 +14,8 @@ const Routes = () => {
         <Scene key='main'>
           <Scene
           title='NYCdriver'
-          key='DashBoard'
-          component={DashBoard}
+          key='PlateNumber'
+          component={PlateNumber}
           />
           <Scene
           title='TestScreen'

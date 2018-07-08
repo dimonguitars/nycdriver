@@ -3,9 +3,12 @@ import { View, Text, TextInput } from 'react-native';
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { enterPlateNumber } from '../actions/plateNumberAction';
+import { storePlateNumber } from '../actions/plateNumberAction';
 
-class DashBoard extends Component {
+class PlateNumber extends Component {
+  state = {
+    input: ''
+  }
   static onEnter = () => {
     Actions.refresh({
       rightTitle: 'next',
@@ -13,26 +16,30 @@ class DashBoard extends Component {
     });
   };
 
-  onPlateNumberInput(plateNumber) {
-    this.props.enterPlateNumber(plateNumber);
+  handleInput(input){
+    this.setState({ input: input })
+  }
+  onPlateNumberInput() {
+    this.props.storePlateNumber(this.state.input)
   }
 
   render() {
     const { plateNumber } = this.props
+    console.log(plateNumber)
     const { labelStyle, textInput, container, buttonStyle } = styles;
     return (
       <View style={container}>
         <Text style={labelStyle}>ENTER PLATE NUMBER</Text>
         <TextInput
           style={textInput}
-          onChangeText={this.onPlateNumberInput.bind(this)}
+          onChangeText={this.handleInput.bind(this)}
           placeholderTextColor="white"
           autoCorrect={false}
           autoCapitalize="characters"
         />
         <Button
           style={buttonStyle}
-          onPress={() => console.log(plateNumber)}
+          onPress={this.onPlateNumberInput.bind(this)}
         >
           NEXT
         </Button>
@@ -74,5 +81,5 @@ mapStatetoProps = ({ plate }) => {
 };
 export default connect(
   mapStatetoProps,
-  { enterPlateNumber }
-)(DashBoard);
+  { storePlateNumber }
+)(PlateNumber);
