@@ -3,6 +3,7 @@ import { Actions, Scene, Router, Stack } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import PlateNumber from './components/PlateNumber';
 import testScreen from './components/testScreen';
+import CreateAccount from './components/CreateAccount';
 
 const Routes = () => {
   return (
@@ -10,6 +11,7 @@ const Routes = () => {
       <Stack key="root">
         <Scene key='auth' initial>
           <Scene key="login" component={LoginForm} hideNavBar />
+          <Scene key="CreateAccount" component={CreateAccount} hideNavBar />
         </Scene>
         <Scene key='main'>
           <Scene

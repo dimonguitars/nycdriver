@@ -6,7 +6,10 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
   USER_EMAIL_REQUIRED,
-  USER_PASSWORD_REQUIRED
+  USER_PASSWORD_REQUIRED,
+  CREATING_USER_ACCOUNT,
+  USER_ACCOUNT_CREATED,
+  PASSWORD_VALIDATE
 } from './types';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,6 +27,13 @@ export const passwordChanged = pass => {
   };
 };
 
+export const PasswordValidate = passValidate => {
+  return {
+    type: PASSWORD_VALIDATE,
+    payload: passValidate
+  }
+}
+
 export const loginUser = ({ email, password }) => {
   return dispatch => {
     if(!email){
@@ -36,10 +46,7 @@ export const loginUser = ({ email, password }) => {
       dispatch({ type: LOGIN_USER})
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => loginSuccess(dispatch, user))
-          .catch(() => firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then(user => loginSuccess(dispatch, user))
-              .catch((error) => loginUserFailed(dispatch, error))
-        );
+          .catch((error) => loginUserFailed(dispatch, error))
     }
   }
 
@@ -48,7 +55,7 @@ export const loginUser = ({ email, password }) => {
 const loginUserFailed = (dispatch, error) => {
   dispatch({
     type: LOGIN_USER_FAILED,
-    payload: error
+    payload: error.message
   });
 };
 
@@ -59,3 +66,21 @@ const loginSuccess = (dispatch, user) => {
   });
 Actions.main();
 };
+
+
+export const createUserAccount = ({ email, password }) => {
+  return dispatch => {
+      ({type: CREATING_USER_ACCOUNT})
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(user => accountCreated(dispatch, user))
+       .catch((error) => loginUserFailed(dispatch, error))
+  }
+}
+
+const accountCreated = (dispatch, user) => {
+  dispatch({
+    type: USER_ACCOUNT_CREATED,
+    payload: "Account created!"
+  })
+  Actions.pop()
+}

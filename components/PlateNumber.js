@@ -25,7 +25,6 @@ class PlateNumber extends Component {
 
   render() {
     const { plateNumber } = this.props
-    console.log(plateNumber)
     const { labelStyle, textInput, container, buttonStyle } = styles;
     return (
       <View style={container}>

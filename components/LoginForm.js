@@ -16,6 +16,8 @@ import {
   emailRequired,
   passwordRequired
 } from '../actions/authActions';
+import CreateAccount from './CreateAccount';
+import { Actions } from 'react-native-router-flux';
 
 class Login extends Component {
   onEmailInput(email) {
@@ -46,26 +48,26 @@ class Login extends Component {
   }
   loginUser() {
     const { email, password } = this.props;
+    this.formInputValidate()
     this.props.loginUser({ email, password });
 
   }
 
   createUserAccount() {
-    console.log('create account');
+    Actions.CreateAccount()
   }
   formInputValidate() {
-    if(this.props.emailRequired)
+    if(this.props.emailRequired || this.props.error)
      return (
-       <Text>PLease enter email</Text>
+       <Text>PLease enter email {this.props.error}</Text>
      )
      else if (this.props.passwordRequired)
      return (
-       <Text>Please enter password</Text>
+       <Text>Please enter password {this.props.error}</Text>
      )
 
   }
   render() {
-    console.log(this.props.user)
     const { button, buttonText, textInput, container, logo } = styles;
     return (
       <View style={container}>
