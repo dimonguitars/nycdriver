@@ -1,17 +1,23 @@
 import firebase from 'firebase';
-import { STORE_PLATE_NUMBER } from './types';
+import { SAVE_PLATE_NUMBER, SAVE_PLATE_NUMBER_FAILED } from './types';
 
 export const storePlateNumber = plateNumber => {
   const { currentUser } = firebase.auth();
-  console.log(currentUser)
-  return (dispatch) => {
-      firebase
-        .database()
-        .ref(`/users/${currentUser.uid}/platenumber`)
-        .push(plateNumber)
-        .then(() => {
-          dispatch({ type: STORE_PLATE_NUMBER, payload: plateNumber });
-        });
+  return dispatch => {
+    firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/platenumber`)
+      .push(plateNumber)
+      .then(() => {
+        dispatch({ type: SAVE, payload: plateNumber });
+      })
+      .catch((error = storePlateNumberFailed(error, dispatch)));
+  };
+};
 
+const storePlateNumberFailed = (error, dispatch) => {
+  return {
+    type: SAVE_PLATE_NUMBER_FAILED,
+    payload: error
   };
 };

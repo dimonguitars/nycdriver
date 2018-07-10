@@ -30,4 +30,4 @@ const styles = {
     padding: 10
   }
 };
-export default Button;
+export { Button };

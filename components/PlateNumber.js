@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import Button from 'react-native-button';
+import { Button } from './Common/Button';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { storePlateNumber } from '../actions/plateNumberAction';
@@ -12,7 +12,7 @@ class PlateNumber extends Component {
   static onEnter = () => {
     Actions.refresh({
       rightTitle: 'next',
-      onRight: () => {}
+      onRight: () => Actions.dashboard()
     });
   };
 
@@ -37,10 +37,11 @@ class PlateNumber extends Component {
           autoCapitalize="characters"
         />
         <Button
-          style={buttonStyle}
+          // style={buttonStyle}
+          label="next"
           onPress={this.onPlateNumberInput.bind(this)}
         >
-          NEXT
+
         </Button>
       </View>
     );

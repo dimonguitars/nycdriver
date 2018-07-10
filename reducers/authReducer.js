@@ -41,12 +41,11 @@ export default (state = INITIAL_STATE, action) => {
     case PASSWORD_VALIDATE:
       return {...state, passValidate: action.payload }
     case LOGIN_USER_FAILED:
-      return { ...state, user: null, error: action.payload, loading: false,
-      emailRequired: false };
+      return { ...state, user: null, error: action.payload, loading: false };
     case CREATING_USER_ACCOUNT:
       return {...state, user: '', loading: true, error:'' };
     case USER_ACCOUNT_CREATED:
-      return {... state, user: '', loading: false };
+      return {... state, user: '', email: '', password: '', loading: false };
     default:
       return state;
   }
