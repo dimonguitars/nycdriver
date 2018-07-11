@@ -14,9 +14,11 @@ import {
   loginUser,
   loginUserFailed,
   emailRequired,
-  passwordRequired
+  passwordRequired,
+  openCreateAccountScreen
 } from '../actions/authActions';
 import CreateAccount from './CreateAccount';
+import {HandleError} from './Common/handleError';
 import { Actions } from 'react-native-router-flux';
 
 class Login extends Component {
@@ -46,6 +48,7 @@ class Login extends Component {
       </TouchableOpacity>
     );
   }
+
   loginUser() {
     const { email, password } = this.props;
     this.formInputValidate();
@@ -53,15 +56,18 @@ class Login extends Component {
   }
 
   createUserAccount() {
-    Actions.CreateAccount();
+    this.props.openCreateAccountScreen()
   }
   formInputValidate() {
-    if (this.props.emailRequired || this.props.error)
-      return <Text>PLease enter email {this.props.error}</Text>;
-    else if (this.props.passwordRequired)
-      return <Text>Please enter password {this.props.error}</Text>;
+    if (this.props.emailRequired)
+      return <Text>{ this.props.emailRequired.toUpperCase()}</Text>;
+    else if(this.props.passwordRequired)
+      return <Text>{ this.props.passwordRequired.toUpperCase()}</Text>
+    else (this.props.error)
+      return <Text>{this.props.error.toUpperCase()}</Text>;
   }
   render() {
+    console.log(this.props.openCreateAccountScreen)
     const {
       button,
       buttonText,
@@ -72,8 +78,11 @@ class Login extends Component {
     } = styles;
     return (
       <View style={container}>
+
         <Text style={logo}>NYCDriver</Text>
-        {this.formInputValidate()}
+
+      <View style={container2}>
+          <HandleError error={this.formInputValidate()}/>
         <TextInput
           placeholder="email@gmail.com"
           onChangeText={this.onEmailInput.bind(this)}
@@ -94,14 +103,15 @@ class Login extends Component {
         />
 
           {this.renderLogginButton()}
-          <View style={container2}>
-            <Text style={{color: 'white', fontSize: 15, marginTop: 100}}>-- OR --</Text>
+        </View>
+          <View style={{}}>
+            <Text style={{color: 'white', fontSize: 11, justifyContent: 'center'}}> Don't have account?</Text>
           <TouchableOpacity
             style={{}}
             title="Create account"
             onPress={this.createUserAccount.bind(this)}
           >
-            <Text style={{color: 'white', fontSize: 20, marginTop: 15}}>CREATE ACCOUNT</Text>
+            <Text style={{color: 'white', fontSize: 20, marginBottom: 15}}> SIGN UP NOW </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -111,14 +121,15 @@ class Login extends Component {
 const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignSelf: 'stretch',
     alignItems: 'center',
     padding: 15,
     backgroundColor: '#5654CE'
   },
   container2: {
-    flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    alignSelf: 'stretch'
   },
   button: {
     height: 40,
@@ -147,11 +158,11 @@ const styles = {
     padding: 10
   },
   logo: {
-    justifyContent: 'space-between',
+    alignItems: 'center',
     color: 'white',
     fontSize: 50,
     fontWeight: '600',
-    marginTop: 100
+    paddingTop: 100
   }
 };
 const mapStatetoProps = ({ auth }) => {
@@ -182,6 +193,7 @@ export default connect(
     loginUser,
     loginUserFailed,
     emailRequired,
-    passwordRequired
+    passwordRequired,
+    openCreateAccountScreen
   }
 )(Login);

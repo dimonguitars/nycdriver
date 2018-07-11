@@ -9,9 +9,9 @@ export const storePlateNumber = plateNumber => {
       .ref(`/users/${currentUser.uid}/platenumber`)
       .push(plateNumber)
       .then(() => {
-        dispatch({ type: SAVE, payload: plateNumber });
+        dispatch({ type: SAVE_PLATE_NUMBER, payload: plateNumber });
       })
-      .catch((error = storePlateNumberFailed(error, dispatch)));
+      .catch((error) => storePlateNumberFailed(error, dispatch));
   };
 };
 

@@ -12,6 +12,7 @@ class PlateNumber extends Component {
   static onEnter = () => {
     Actions.refresh({
       rightTitle: 'next',
+      leftTitle: 'back',
       onRight: () => Actions.dashboard()
     });
   };
@@ -21,6 +22,8 @@ class PlateNumber extends Component {
   }
   onPlateNumberInput() {
     this.props.storePlateNumber(this.state.input)
+    if(!this.props.error)
+    Actions.dashboard()
   }
 
   render() {
@@ -76,8 +79,8 @@ const styles = {
   }
 };
 mapStatetoProps = ({ plate }) => {
-  const { plateNumber } = plate;
-  return { plateNumber };
+  const { plateNumber, error } = plate;
+  return { plateNumber, error };
 };
 export default connect(
   mapStatetoProps,

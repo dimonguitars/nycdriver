@@ -7,8 +7,10 @@ import {
   passwordChanged,
   PasswordValidate
 } from '../actions/authActions';
+import {HandleError} from './Common/handleError'
 
 class CreateAccount extends Component {
+
   onEmailInput(email) {
     this.props.emailChanged(email);
   }
@@ -48,7 +50,7 @@ class CreateAccount extends Component {
     return (
       <View style={container}>
         <Text style={logo}>NYCDriver</Text>
-        {this.handleError()}
+        <HandleError error={this.handleError()}/>
         <TextInput
           placeholder="email@gmail.com"
           onChangeText={this.onEmailInput.bind(this)}

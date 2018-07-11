@@ -9,7 +9,8 @@ import {
   USER_PASSWORD_REQUIRED,
   CREATING_USER_ACCOUNT,
   USER_ACCOUNT_CREATED,
-  PASSWORD_VALIDATE
+  PASSWORD_VALIDATE,
+  CREATE_ACCOUNT_SCREEN
 } from './types';
 import { Actions } from 'react-native-router-flux';
 
@@ -77,10 +78,17 @@ export const createUserAccount = ({ email, password }) => {
   }
 }
 
-const accountCreated = (dispatch, user) => {
+ export const accountCreated = (dispatch, user) => {
   dispatch({
     type: USER_ACCOUNT_CREATED,
     payload: "Account created!"
   })
   Actions.pop()
+}
+
+export const openCreateAccountScreen = () => {
+  return dispatch => {
+     dispatch({type: CREATE_ACCOUNT_SCREEN, payload: ""})
+     Actions.CreateAccount();
+  };
 }

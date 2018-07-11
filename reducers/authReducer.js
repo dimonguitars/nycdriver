@@ -8,7 +8,8 @@ import {
   USER_PASSWORD_REQUIRED,
   CREATING_USER_ACCOUNT,
   USER_ACCOUNT_CREATED,
-  PASSWORD_VALIDATE
+  PASSWORD_VALIDATE,
+  CREATE_ACCOUNT_SCREEN
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,9 +27,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EMAIL_CHANGED:
-      return { ...state, email: action.payload, emailRequired: false };
+      return { ...state, email: action.payload, emailRequired: false, error:'' };
     case PASSWORD_CHANGED:
-      return { ...state, password: action.payload, passwordRequired: false };
+      return { ...state, password: action.payload, passwordRequired: false, error:'' };
     case LOGIN_USER:
       return { ...state, user: null, passwordRequired: false,
          emailRequired: false, loading: true  };
@@ -46,6 +47,8 @@ export default (state = INITIAL_STATE, action) => {
       return {...state, user: '', loading: true, error:'' };
     case USER_ACCOUNT_CREATED:
       return {... state, user: '', email: '', password: '', loading: false };
+    case CREATE_ACCOUNT_SCREEN:
+     return { ...state, error: ''}
     default:
       return state;
   }
