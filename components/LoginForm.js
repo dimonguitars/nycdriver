@@ -78,8 +78,10 @@ class Login extends Component {
     } = styles;
     return (
       <View style={container}>
-
-        <Text style={logo}>NYCDriver</Text>
+        <View style={{alignItems:'center'}}>
+          <Text style={logo}>NYCDriver</Text>
+          <Text style={{color:'#d6c0c0', padding: 5, fontSize: 14}}>TRACK YOUR PARKING TICKET</Text>
+        </View>
 
       <View style={container2}>
           <HandleError error={this.formInputValidate()}/>

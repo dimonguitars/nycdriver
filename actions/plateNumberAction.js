@@ -1,5 +1,6 @@
 import firebase from 'firebase';
-import { SAVE_PLATE_NUMBER, SAVE_PLATE_NUMBER_FAILED } from './types';
+import axios from 'axios';
+import { SAVE_PLATE_NUMBER, SAVE_PLATE_NUMBER_FAILED, FETCH_TICKETS } from './types';
 
 export const storePlateNumber = plateNumber => {
   const { currentUser } = firebase.auth();
@@ -21,3 +22,9 @@ const storePlateNumberFailed = (error, dispatch) => {
     payload: error
   };
 };
+
+
+export const fetchTickets = (plateNumber) => async dispatch => {
+    const tickets = await axios.get(`https://data.cityofnewyork.us/resource/uvbq-3m68.json?plate=${plateNumber}`)
+    dispatch({ type: FETCH_TICKETS, payload: tickets})
+  }

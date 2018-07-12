@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import {
   createUserAccount,
@@ -29,7 +29,7 @@ class CreateAccount extends Component {
   passwordValidate(){
     const { password, passValidate, email } = this.props;
     if(password != passValidate){
-        alert("Password not match")
+        AlertIOS.alert("Password not match")
         return
     }
     this.props.createUserAccount({ email, password })
@@ -39,7 +39,7 @@ class CreateAccount extends Component {
     (this.props.error)
     return (
       <Text>
-        {this.props.error}
+        {this.props.error.toUpperCase()}
       </Text>
     )
   }

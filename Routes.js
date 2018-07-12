@@ -5,16 +5,17 @@ import PlateNumber from './components/PlateNumber';
 import testScreen from './components/testScreen';
 import CreateAccount from './components/CreateAccount';
 import DashBoard from './components/DashBoard';
+import TicketDetails from './components/TicketDetails'
 
 const Routes = () => {
   return (
     <Router>
-      <Stack key="root">
-        <Scene key='auth' initial>
+      <Stack key="root" hideNavBar>
+        <Scene key='auth'  >
           <Scene key="login" component={LoginForm} hideNavBar />
           <Scene key="CreateAccount" component={CreateAccount} hideNavBar />
         </Scene>
-        <Scene key='main'>
+        <Scene key='main' initial>
           <Scene
           title='NYCdriver'
           key='PlateNumber'
@@ -25,7 +26,8 @@ const Routes = () => {
           key='testScreen'
           component={testScreen}
           />
-          <Scene key='dashboard' component={DashBoard} />
+          <Scene key='dashboard' component={DashBoard}  backTitle="back" />
+          <Scene key='ticketdetails' component={TicketDetails} />
         </Scene>
       </Stack>
     </Router>

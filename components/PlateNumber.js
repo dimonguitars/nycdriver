@@ -18,11 +18,10 @@ class PlateNumber extends Component {
   };
 
   handleInput(input){
-    this.setState({ input: input })
+      this.props.storePlateNumber(input)
+    // this.setState({ input: input })
   }
   onPlateNumberInput() {
-    this.props.storePlateNumber(this.state.input)
-    if(!this.props.error)
     Actions.dashboard()
   }
 
