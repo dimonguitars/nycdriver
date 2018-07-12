@@ -15,7 +15,7 @@ const Routes = () => {
           <Scene key="login" component={LoginForm} hideNavBar />
           <Scene key="CreateAccount" component={CreateAccount} hideNavBar />
         </Scene>
-        <Scene key='main' initial>
+        <Scene key='main' >
           <Scene
           title='NYCdriver'
           key='PlateNumber'
@@ -26,8 +26,10 @@ const Routes = () => {
           key='testScreen'
           component={testScreen}
           />
-          <Scene key='dashboard' component={DashBoard}  backTitle="back" />
+          <Scene key='ticket' initial>
+          <Scene key='dashboard' component={DashBoard}  backTitle="back"/>
           <Scene key='ticketdetails' component={TicketDetails} />
+        </Scene>
         </Scene>
       </Stack>
     </Router>

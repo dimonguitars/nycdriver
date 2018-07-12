@@ -20,7 +20,7 @@ class DashBoard extends Component {
   }
   render() {
     const { tickets } = this.props;
-    console.log(typeof tickets);
+
     return (
       <View style={{}}>
         <Header
@@ -32,23 +32,35 @@ class DashBoard extends Component {
           rightComponent={{ icon: 'home', color: '#fff' }}
         />
           <ScrollView>
-            <Card>
+
             {
               _.map(tickets.data, (ticket, key) => {
                 return (
+                  <Card>
                   <ListItem
+                    subtitleStyle={styles.subtitleStyle}
+                    titleStyle={{fontSize:18, justifyContent:'flex-start'}}
                     key={key}
-                    title={ticket.violation}
+                    title={'NO PARKING STREET CLEANING'}
+                    leftIcon={{name: 'alarm'}}
+                    subtitle={"45"}
                     onPress={() => Actions.ticketdetails({ticket})}
                   />
+                </Card>
                 )
               })
             }
-          </Card>
+
           </ScrollView>
         <Button title="get ticket" />
       </View>
     );
+  }
+}
+const styles = {
+  subtitleStyle: {
+    fontSize: 12,
+    color: 'red'
   }
 }
 mapStatetoProps = ({ plate }) => {
