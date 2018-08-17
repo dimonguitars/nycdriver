@@ -1,5 +1,5 @@
 # nycdriver
-Mobile app for NYC drivers.
+Mobile App (React-Native) for NYC drivers.
 
 App allows to track and pay parking tickets based on provided plate number. 
 
