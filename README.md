@@ -11,7 +11,11 @@ Firebase Auth and DB;
 Rest API;
 React-native-elements;
 
-<div align='center'>
+<hr>
+
+
+
+<div align='center' >
 <img src="https://media.giphy.com/media/5Yl0Gw7tm4zrkZcoo0/giphy.gif" width='300' height='600' align='center'>
 </div>
 
