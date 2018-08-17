@@ -10,7 +10,7 @@ Firebase Auth and DB;
 Rest API;
 React-native-elements;
 
-[url=https://ibb.co/m1PODK][img]https://preview.ibb.co/kbXofz/driver.gif[/img][/url]
+<a href="https://ibb.co/m1PODK"><img src="https://thumb.ibb.co/m1PODK/driver.gif" alt="driver" border="0"></a>
 
 
 
