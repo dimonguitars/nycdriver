@@ -10,8 +10,7 @@ Firebase Auth and DB;
 Rest API;
 React-native-elements;
 
-<img src="https://ibb.co/m1PODK" alt="driver" border="0" width='200' height='600'>
-
+<img src="https://ibb.co/m1PODK" alt="Girl in a jacket" style="width:500px;height:600px;">
 
 
 
