@@ -10,9 +10,5 @@ Firebase Auth and DB;
 Rest API;
 React-native-elements;
 
-<img src="https://ibb.co/m1PODK" alt="NYCDiver" width=”50” height=”50”">
-
-
-
-
+<img src="https://media.giphy.com/media/5Yl0Gw7tm4zrkZcoo0/giphy.gif" width='300' height='600' align='center'>
 
